@@ -26,15 +26,16 @@ public class NewsRESTController {
     @GetMapping(path="{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getArticle (@PathVariable String id ) {
 
-        // get the opt from boardgame services after passing in the id to retrive payload from repo
+        // get the opt from services after passing in the id to retrive payload from repo
         Optional<Articles> opt = newsSvc.getArticleById(id);
 
         // payload format is in opt
         if (opt.isEmpty()) {
             JsonObject err = Json.createObjectBuilder()
-                .add("error", "Id %s not found".formatted(id))
+                .add("error", "Cannot find news article %s".formatted(id))
                 .build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
                     .body(err.toString());
         }
 

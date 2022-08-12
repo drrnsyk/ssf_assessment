@@ -127,12 +127,12 @@ public class NewsService {
         else
         {
 
-            // JsonObject jo = boardgame.readStrCreateJsonObject(payload);
+            // JsonObject jo = article.readStrCreateJsonObject(payloadStr);
             StringReader strReader = new StringReader(payloadStr);
             JsonReader jsonReader = Json.createReader(strReader);
             JsonObject payloadJsonObject = jsonReader.readObject();
 
-            // return Optional.of(boardgame.readJsonObjCreateBoardgame(jo));
+            // return Optional.of(article.readJsonObjCreateBoardgame(jo));
             article.setId(payloadJsonObject.getString("id"));
             article.setPublished_on(payloadJsonObject.get("published_on").toString());
             article.setTitle(payloadJsonObject.getString("title"));

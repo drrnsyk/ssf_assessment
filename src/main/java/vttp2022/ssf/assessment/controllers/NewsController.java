@@ -41,8 +41,8 @@ public class NewsController {
         // model.addAttribute("language", language);
         model.addAttribute("listOfArticles", listOfArticles);
 
-        boolean flag = false;
-        model.addAttribute("flag", flag);
+        // boolean flag = false;
+        // model.addAttribute("flag", flag);
         
         return "news";
 
