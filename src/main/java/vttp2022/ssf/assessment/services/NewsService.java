@@ -6,6 +6,7 @@ import java.io.StringReader;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -111,6 +112,37 @@ public class NewsService {
     public void saveArticles(List<Articles> list) {
 
         newsRepo.save(list);
+
+    }
+
+
+    public Optional<Articles> getArticleById(String id) {
+
+        Articles article = new Articles();
+        
+        String payloadStr = newsRepo.getFromRedis(id);
+        if (payloadStr == null) {
+            return Optional.empty();
+        }
+        else
+        {
+
+            // JsonObject jo = boardgame.readStrCreateJsonObject(payload);
+            StringReader strReader = new StringReader(payloadStr);
+            JsonReader jsonReader = Json.createReader(strReader);
+            JsonObject payloadJsonObject = jsonReader.readObject();
+
+            // return Optional.of(boardgame.readJsonObjCreateBoardgame(jo));
+            article.setId(payloadJsonObject.getString("id"));
+            article.setPublished_on(payloadJsonObject.get("published_on").toString());
+            article.setTitle(payloadJsonObject.getString("title"));
+            article.setUrl(payloadJsonObject.getString("url"));
+            article.setImageurl(payloadJsonObject.getString("imageurl"));
+            article.setBody(payloadJsonObject.getString("body"));
+            article.setTags(payloadJsonObject.getString("tags"));
+            article.setCategories(payloadJsonObject.getString("categories"));
+            return Optional.of(article);
+        }
 
     }
 

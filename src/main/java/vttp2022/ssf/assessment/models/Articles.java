@@ -1,5 +1,8 @@
 package vttp2022.ssf.assessment.models;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+
 public class Articles {
 
     private String id;
@@ -10,6 +13,7 @@ public class Articles {
     private String body;
     private String tags;
     private String categories;
+    private boolean flag;
 
     public String getId() {
         return id;
@@ -25,6 +29,12 @@ public class Articles {
     }
     public String getTitle() {
         return title;
+    }
+    public boolean isFlag() {
+        return flag;
+    }
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
     public void setTitle(String title) {
         this.title = title;
@@ -73,6 +83,20 @@ public class Articles {
     //     articles.setCategories(jo.getString("categories"));
     //     return articles;
     // }
+
+    public JsonObject readModelCreateJsonObj() {
+        return Json.createObjectBuilder()
+            .add("id", id)
+            .add("published_on", published_on)
+            .add("title", title)
+            .add("url", url)
+            .add("imageurl", imageurl)
+            .add("body", body)
+            .add("tags", tags)
+            .add("categories", categories)
+            .build();
+    }
+
     
     
 }

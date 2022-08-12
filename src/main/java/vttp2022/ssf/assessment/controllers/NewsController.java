@@ -40,6 +40,9 @@ public class NewsController {
         // data injection into thymeleaf html
         // model.addAttribute("language", language);
         model.addAttribute("listOfArticles", listOfArticles);
+
+        boolean flag = false;
+        model.addAttribute("flag", flag);
         
         return "news";
 
@@ -63,7 +66,7 @@ public class NewsController {
 
         newsSvc.saveArticles(saveList);
 
-        // System.out.println(saveList.size());
+        // System.out.println(form.getFirst("flag"));
 
         // String id = form.getFirst("id");
         // String published_on = form.getFirst("published");
