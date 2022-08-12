@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Crypto News Articles</title>
+        <style>
+            .center {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="center">
+            <h1>Crypto News of the Day</h1>
+        </div>
+        <hr>
+
+        <div>
+            <table>
+                <tr data-th-each="l: ${listOfArticles}">
+                    <td>
+                        <img data-th-src="${l.getImageurl}"  width="200" height="200">
+                        <br>
+                        <span>ID:</span>
+                        <span data-th-text="${l.getId}">ID</span>
+                        <br>
+                        <h3><span data-th-text="${l.getTitle}">Title</span></h3>
+                        <br>
+                        <span data-th-text="${l.getBody}">Body</span>
+                        <br>
+                        <br>
+                        <span>Link to full article:</span>
+                        <a data-th-href="${l.getUrl}"><span data-th-text="${l.getUrl}"></span></a>
+                        <br>
+                        <br>
+                        <span>Categories:</span>
+                        <span data-th-text="${l.getCategories}">Categories</span>
+                        <br>
+                        <span>Tags:</span>
+                        <span data-th-text="${l.getTags}">Tags</span>
+                        <br>
+                        <br>
+                        <span>Published:</span>
+                        <span data-th-text="${l.getPublished_on}">Published</span>
+                        <hr>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        
+    </body>
+</html>
