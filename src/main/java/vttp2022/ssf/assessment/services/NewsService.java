@@ -2,11 +2,12 @@ package vttp2022.ssf.assessment.services;
 
 import java.io.Reader;
 import java.io.StringReader;
-import java.net.URLEncoder;
+// import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,13 @@ import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 import vttp2022.ssf.assessment.models.Articles;
+import vttp2022.ssf.assessment.repositories.NewsRepository;
 
 @Service
 public class NewsService {
+
+    @Autowired
+    private NewsRepository newsRepo;
     
     // API call from crypto compare
     public static final String URL = "https://min-api.cryptocompare.com/data/v2/news/";
@@ -30,15 +35,15 @@ public class NewsService {
     @Value("${API_KEY}")
     private String key;
 
-    public List<Articles> getArticles(String language) {
+    public List<Articles> getArticles() {
 
         String payloadStr;
 
-        System.out.println("Getting news Articles from CryptoCompare.com");
+        // System.out.println("Getting news Articles from CryptoCompare.com");
 
         try {
             String url = UriComponentsBuilder.fromUriString(URL)
-                            .queryParam("fsym", URLEncoder.encode(language, "UTF-8"))
+                            //.queryParam("lang", URLEncoder.encode(language, "UTF-8"))
                             .queryParam("appid", key)
                             .toUriString();
 
@@ -74,21 +79,39 @@ public class NewsService {
         JsonArray data = payloadJsonObject.getJsonArray("Data");
 
         // print out data size to check content
-        System.out.println("This is the size of the data json array:" + data.size());
+        // System.out.println("This is the size of the data json array:" + data.size());
         // System.out.println(data.get(0));
 
         // instantiate a list to store the data
         List<Articles> list = new LinkedList<>();
+        // Articles articles = new Articles();
 
         for (int i = 0; i < data.size(); i++) {
-            JsonObject dataJsonObject = data.getJsonObject(i);
-            list.add(Articles.create(dataJsonObject));
+            Articles articles = new Articles();
+            JsonObject jo = data.getJsonObject(i);
+            articles.setId(jo.getString("id"));
+            articles.setPublished_on(jo.get("published_on").toString());
+            articles.setTitle(jo.getString("title"));
+            articles.setUrl(jo.getString("url"));
+            articles.setImageurl(jo.getString("imageurl"));
+            articles.setBody(jo.getString("body"));
+            articles.setTags(jo.getString("tags"));
+            articles.setCategories(jo.getString("categories"));
+            list.add(articles);
+            // list.add(Articles.create(dataJsonObject));
         }
 
-        System.out.println("This is the size of list of articles: " + list.size());
+        // System.out.println("This is the size of list of articles: " + list.size());
 
         return list;
         
+    }
+
+
+    public void saveArticles(List<Articles> list) {
+
+        newsRepo.save(list);
+
     }
 
 }

@@ -1,7 +1,5 @@
 package vttp2022.ssf.assessment.models;
 
-import jakarta.json.JsonObject;
-
 public class Articles {
 
     private String id;
@@ -63,18 +61,18 @@ public class Articles {
     }
 
     // construct the model from json object
-    public static Articles create(JsonObject jo) {
-        Articles articles = new Articles();
-        articles.setId(jo.getString("id"));
-        articles.setPublished_on(jo.get("published_on").toString());
-        articles.setTitle(jo.getString("title"));
-        articles.setUrl(jo.getString("url"));
-        articles.setImageurl(jo.getString("imageurl"));
-        articles.setBody(jo.getString("body"));
-        articles.setTags(jo.getString("tags"));
-        articles.setCategories(jo.getString("categories"));
-        return articles;
-    }
+    // public static Articles create(JsonObject jo) {
+    //     Articles articles = new Articles();
+    //     articles.setId(jo.getString("id"));
+    //     articles.setPublished_on(jo.get("published_on").toString());
+    //     articles.setTitle(jo.getString("title"));
+    //     articles.setUrl(jo.getString("url"));
+    //     articles.setImageurl(jo.getString("imageurl"));
+    //     articles.setBody(jo.getString("body"));
+    //     articles.setTags(jo.getString("tags"));
+    //     articles.setCategories(jo.getString("categories"));
+    //     return articles;
+    // }
     
     
 }

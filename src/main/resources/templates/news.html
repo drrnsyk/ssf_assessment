@@ -17,39 +17,65 @@
         </div>
         <hr>
 
-        <div>
-            <table>
-                <tr data-th-each="l: ${listOfArticles}">
-                    <td>
-                        <img data-th-src="${l.getImageurl}"  width="200" height="200">
-                        <br>
-                        <span>ID:</span>
-                        <span data-th-text="${l.getId}">ID</span>
-                        <br>
-                        <h3><span data-th-text="${l.getTitle}">Title</span></h3>
-                        <br>
-                        <span data-th-text="${l.getBody}">Body</span>
-                        <br>
-                        <br>
-                        <span>Link to full article:</span>
-                        <a data-th-href="${l.getUrl}"><span data-th-text="${l.getUrl}"></span></a>
-                        <br>
-                        <br>
-                        <span>Categories:</span>
-                        <span data-th-text="${l.getCategories}">Categories</span>
-                        <br>
-                        <span>Tags:</span>
-                        <span data-th-text="${l.getTags}">Tags</span>
-                        <br>
-                        <br>
-                        <span>Published:</span>
-                        <span data-th-text="${l.getPublished_on}">Published</span>
-                        <hr>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        
+        <form method="POST" action="/articles">
+            <div class="center">
+                <button type="submit">Save Checked Articles</button>
+            </div>
+            <hr>
+            <div>
+                <table>
+                    <tr data-th-each="l: ${listOfArticles}">
+                        <td>
+                            <img data-th-src="${l.getImageurl}" width="200" height="200">
+                            <br>
+                            <span>ID:</span>
+                            <span data-th-text="${l.getId}">id</span>
+                            <br>
+                            <h3><span data-th-text="${l.getTitle}">title</span></h3>
+                            <br>
+                            <span data-th-text="${l.getBody}">body</span>
+                            <br>
+                            <br>
+                            <span>Link to full article:</span>
+                            <a data-th-href="${l.getUrl}"><span data-th-text="${l.getUrl}"></span></a>
+                            <br>
+                            <br>
+                            <span>Categories:</span>
+                            <span data-th-text="${l.getCategories}">categories</span>
+                            <br>
+                            <span>Tags:</span>
+                            <span data-th-text="${l.getTags}">tags</span>
+                            <br>
+                            <br>
+                            <span>Published:</span>
+                            <span data-th-text="${l.getPublished_on}">published</span>
+                            <br>
+                            <br>
+                            <label>
+                                <input type="checkbox"/> Save Article
+                                <!-- <input type="text" name="article" data-th-value="${l}"> -->
+                            </label>
+                            <br>
+                            <input type="text" name="imageurl" data-th-value="${l.getImageurl}">
+                            <input type="text" name="id" data-th-value="${l.getId}">
+                            <input type="text" name="title" data-th-value="${l.getTitle}">
+                            <input type="text" name="body" data-th-value="${l.getBody}">
+                            <input type="text" name="url" data-th-value="${l.getUrl}">
+                            <input type="text" name="categories" data-th-value="${l.getCategories}">
+                            <input type="text" name="tags" data-th-value="${l.getTags}">
+                            <input type="text" name="published" data-th-value="${l.getPublished_on}">
+                            
+                            <!-- <form method="POST" action="/news">
+                                <label>
+                                    <input type="checkbox"/> Save Article
+                                </label>
+                            </form> -->
+                            <br>
+                            <hr>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
     </body>
 </html>
