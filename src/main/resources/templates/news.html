@@ -52,17 +52,17 @@
                             <br>
                             <br>
                             <label>
-                                <input type="checkbox" name="flag"/> Save Article
+                                <input type="checkbox" name="flag" value="1"/> Save Article
                             </label>
                             <br>
-                            <input type="text" name="imageurl" data-th-value="${l.getImageurl}">
-                            <input type="text" name="id" data-th-value="${l.getId}">
-                            <input type="text" name="title" data-th-value="${l.getTitle}">
-                            <input type="text" name="body" data-th-value="${l.getBody}">
-                            <input type="text" name="url" data-th-value="${l.getUrl}">
-                            <input type="text" name="categories" data-th-value="${l.getCategories}">
-                            <input type="text" name="tags" data-th-value="${l.getTags}">
-                            <input type="text" name="published" data-th-value="${l.getPublished_on}">
+                            <input type="hidden" name="imageurl" data-th-value="${l.getImageurl}">
+                            <input type="hidden" name="id" data-th-value="${l.getId}">
+                            <input type="hidden" name="title" data-th-value="${l.getTitle}">
+                            <input type="hidden" name="body" data-th-value="${l.getBody}">
+                            <input type="hidden" name="url" data-th-value="${l.getUrl}">
+                            <input type="hidden" name="categories" data-th-value="${l.getCategories}">
+                            <input type="hidden" name="tags" data-th-value="${l.getTags}">
+                            <input type="hidden" name="published" data-th-value="${l.getPublished_on}">
                             
                             <!-- <form method="POST" action="/news">
                                 <label>
